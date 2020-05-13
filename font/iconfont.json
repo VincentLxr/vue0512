@@ -1,0 +1,51 @@
+{
+  "id": "1811957",
+  "name": "微博",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1267006",
+      "name": "钱",
+      "font_class": "zhanghu",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
+      "icon_id": "665731",
+      "name": "笑脸",
+      "font_class": "icon1460189798382",
+      "unicode": "e644",
+      "unicode_decimal": 58948
+    },
+    {
+      "icon_id": "1362986",
+      "name": "闪电",
+      "font_class": "shandian",
+      "unicode": "e67a",
+      "unicode_decimal": 59002
+    },
+    {
+      "icon_id": "3116231",
+      "name": "视频",
+      "font_class": "shipin",
+      "unicode": "e62c",
+      "unicode_decimal": 58924
+    },
+    {
+      "icon_id": "13962588",
+      "name": "井号",
+      "font_class": "jinghao",
+      "unicode": "e6e3",
+      "unicode_decimal": 59107
+    },
+    {
+      "icon_id": "14388391",
+      "name": "图片",
+      "font_class": "tupian",
+      "unicode": "e653",
+      "unicode_decimal": 58963
+    }
+  ]
+}

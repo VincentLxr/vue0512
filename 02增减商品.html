@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>增减商品</title>
+    <link rel="stylesheet" href="./font/iconfont.css">
+    <style>
+        #com {
+            width: 400px;
+            margin: 0px auto;
+            background-color: rgb(184, 252, 252);
+        }
+
+        .int {
+            
+            width: 395px;
+        }
+
+        label {
+            margin: 10px;
+        }
+
+        input {
+            outline: none;
+            margin: 10px;
+            width: 270px;
+            box-shadow: 1px 1px 10px -5px black;
+        }
+
+        button {
+            width: 100px;
+            height: 25px;
+            margin-top: 5px;
+            margin-left: 285px;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            background-color: rgb(16, 117, 175);
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 5px #999;
+        }
+
+        button:active {
+            box-shadow: 0 2px #666;
+            transform: translateY(2px);
+        }
+
+        table {
+            margin-top: 10px;
+            background-color: white;
+            width: 400px;
+        }
+
+        td {
+            width: 60px;
+            text-align: center;
+        }
+
+        .span {
+            display: inline-block;
+            width: 50px;
+            line-height: 20px;
+            cursor: pointer;
+            background-color: rgb(1, 159, 187);
+            color: white;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="com">
+        <div class="int">
+            <label>商品名称：</label><input type="text" name="name" v-model="name" id="message" /></br>
+            <label>商品价格：</label><input type="number" name="price" v-model="price" id="message2" /></br>
+        </div>
+        <button @click="add()">增加商品</button>
+        <table cellspacing="1">
+            <template v-for="(v,index) in goods">
+                <tr style="background-color: rgb(248, 141, 0); color: white;" v-if="index==0">
+                    <td v-for="t in title">{{t}}</td>
+                </tr>
+                <tr>
+                    <td>{{index+1}}</td>
+                    <td>{{v.name}}</td>
+                    <td>{{v.price}}<span class="iconfont icon-zhanghu" style="font-size: 15px;"></span></td>
+                    <td><span @click="del(index)" class='span'>删除</span></td>
+                </tr>
+            </template>
+        </table>
+    </div>
+</body>
+<script src="vue.js"></script>
+<script>
+    new Vue({
+        el: '#com',
+        data: {
+            title: [
+                '商品序号',
+                '商品名称',
+                '商品价格',
+                '删除商品'
+            ],
+            goods: [
+                { name: '恶果之地', price: '19' },
+                { name: '欢乐兄弟', price: '6' }
+            ],
+            name: '',
+            price: ''
+        },
+        methods: {
+            add: function () {
+                let inputVal = document.getElementById("message").value;
+                let inputVal2 = document.getElementById("message2").value;
+                // 清除空格并判断是否为空
+                if (!inputVal.trim() || !inputVal2.trim()) {
+                    alert("输入不能为空!");
+                    return false;
+                }
+                let str = { name: this.name, price: this.price };
+                this.goods.unshift(str);
+
+            },
+            del: function (index) {
+                this.goods.splice(index, 1);
+            }
+        }
+    });
+</script>
+
+</html>

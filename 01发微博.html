@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>发帖</title>
+    <link rel="stylesheet" href="./font/iconfont.css">
+    <style>
+        .head {
+            width: 480px;
+            height: 30px;
+            margin-left: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .head p {
+            color: steelblue;
+            font-family: 楷体;
+        }
+
+        .head a {
+            text-decoration: none;
+            font-family: 宋体;
+            color: orange;
+        }
+
+        #post {
+            width: 500px;
+            margin: 0px auto;
+            border: 5px solid rgb(196, 196, 196);
+        }
+
+        textarea {
+            border: 0px;
+            width: 480px;
+            margin: 0px 7px;
+            outline: none;
+            height: 150px;
+            border: 1px solid red;
+            box-shadow: 1px 1px 10px -1px blanchedalmond;
+        }
+
+        button {
+            width: 50px;
+            height: 25px;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            background-color: hotpink;
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 5px #999;
+        }
+
+        button:hover {}
+
+        button:active {
+            box-shadow: 0 2px #666;
+            transform: translateY(2px);
+        }
+
+        ul {
+            padding: 0px;
+        }
+
+        li {
+            width: 490px;
+            height: 30px;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            margin-left: 5px;
+            border: 1px solid orange;
+        }
+
+        p {
+            margin: 0px;
+        }
+
+        .span {
+            background-color: rgb(0, 255, 170);
+            cursor: pointer;
+        }
+
+        .but {
+            width: 495px;
+            height: 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            line-height: 50px;
+        }
+
+        .icon {
+            height: 35px;
+            line-height: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .icon a {
+            margin-left: 6px;
+            font-size: 16px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .icon a span {
+            color: black;
+            font-size: 12px;
+            margin-left: 5px;
+            font-family: 宋体;
+        }
+
+        .icon a span:hover {
+            color: coral;
+        }
+
+        .icon-icon1460189798382 {
+            color: orange;
+            margin-right: 5px;
+        }
+
+        .icon-tupian {
+            color: greenyellow;
+            margin-right: 5px;
+        }
+
+        .icon-shipin {
+            color: skyblue;
+            margin-right: 5px;
+            font-size: 20px;
+        }
+
+        .icon-jinghao {
+            color: blue;
+            margin-right: 5px;
+        }
+
+        .icon-shandian {
+            color: rgb(255, 139, 6);
+            margin-right: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="post">
+        <div class="head">
+            <p>有什么新鲜事想告诉大家？</p>
+            <a href="https://d.weibo.com/102803">热门微博</a>
+        </div>
+        <textarea v-model='message' id="message"></textarea></br>
+        <div class="but">
+            <div class="icon">
+                <a href="javascript:;" class="iconfont icon-icon1460189798382"><span>表情</span></a>
+                <a href="javascript:;" class="iconfont icon-tupian"><span>图片</span></a>
+                <a href="javascript:;" class="iconfont icon-shipin"><span>视频</span></a>
+                <a href="javascript:;" class="iconfont icon-jinghao"><span>话题</span></a>
+                <a href="javascript:;" class="iconfont icon-shandian"><span>头条</span></a>
+            </div>
+            <div class="sele">
+                <select style="border: 0px; width: 60px;">
+                    <option value="公开">公开</option>
+                    <option value="粉丝">粉丝</option>
+                    <option value="好友圈">好友圈</option>
+                    <option value="仅自己可见">仅自己可见</option>
+                </select>
+                <button @click="add()" id="btn">发布</button>
+            </div>
+        </div>
+        <ul>
+            <li v-for="(v,i,key) in article">
+                <p id="p">{{v}}</p>
+                <span @click="del(i,key)" class="span">删除</span>
+            </li>
+        </ul>
+    </div>
+</body>
+<script src="vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#post",
+        data: {
+            article: [],
+            message: ""
+        },
+        methods: {
+            add: function () {
+                let inputVal = document.getElementById("message").value;
+                // 清除空格并判断是否为空
+                if (!inputVal.trim()) {
+                    alert("输入不能为空!");
+                    return false;
+                }
+                // 创建一个时间戳 作为 key
+                let key = Date.now().toString();
+                // 将内容添加本地存储
+                localStorage.setItem(key, inputVal);
+                this.article.unshift(this.message);
+
+            },
+            del: function (i, key) {
+                this.article.splice(i, 1);
+                for (let key in localStorage) {
+                    if (localStorage.hasOwnProperty(key)) {
+                        //参数：值，key
+                        localStorage.getItem(key);                        
+                    }
+                    localStorage.removeItem(key,i);
+                };
+                
+            }
+        }
+    });
+    for (let key in localStorage) {
+        if (localStorage.hasOwnProperty(key)) {
+            //参数：值，key
+            let value = localStorage.getItem(key);
+            console.log(value);
+            vm.article.unshift(value);
+        }
+    };
+</script>
+
+</html>
